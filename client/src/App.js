@@ -6,15 +6,16 @@ import { Notifications } from "./component/Notifications";
 const App = () => {
   return (
     <div>
-      <div>
-        <div className="flex justify-center items-center border-y-8 bg-white">
-          Video Chat
-        </div>
+      <div className="flex justify-center items-center border bg-white">
+        Video Chat
       </div>
-      <VideoPlayer />
-      <Options>
-        <Notifications />
-      </Options>
+
+      <div className="flex flex-col justify-center items-center">
+        <VideoPlayer />
+        <Options>
+          <Notifications />
+        </Options>
+      </div>
     </div>
   );
 };
