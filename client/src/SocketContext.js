@@ -15,6 +15,7 @@ const ContextProvider = ({ children }) => {
   const [call, setCall] = useState({});
   const [callAccepted, setCallAccepted] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
+  const [name, setName] = useState("");
 
   const myVideo = useRef();
   const userVideo = useRef();
@@ -42,6 +43,7 @@ const ContextProvider = ({ children }) => {
     setCallAccepted(true);
 
     //to create a peer capable of video call
+    //initiator is set to false as the call is not initiated by the receiver
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
     //using peer and socket to achieve the video connection
@@ -61,7 +63,65 @@ const ContextProvider = ({ children }) => {
     connectionRef.current = peer;
   };
 
-  const callUser = () => {};
+  const callUser = (id) => {
+    //initiator is set to true as this user initiates the call
+    const peer = new Peer({ initiator: true, trickle: false, stream });
 
-  const leaveCall = () => {};
+    //using peer and socket to achieve the video connection
+    peer.on("signal", (data) => {
+      socket.emit("calluser", {
+        userToCall: id,
+        signalData: data,
+        from: me,
+        name,
+      });
+    });
+
+    //the video stream for the receiving user
+    peer.on("stream", (currentStream) => {
+      userVideo.current.srcObject = currentStream;
+    });
+
+    //to accept the incoming call inconjuction with the backend logic(socket.io('callaccepted', ....))
+    socket.on("callccepted", (signal) => {
+      setCallAccepted(true);
+
+      peer.signal(signal);
+    });
+
+    //setting the video connectionRef to the peer
+    connectionRef.current = peer;
+  };
+
+  const leaveCall = () => {
+    setCallEnded(true);
+
+    connectionRef.current.destroy();
+
+    //to immediately reload the page post-call and provide the user with a new id to enable new calls
+    window.location.reload();
+  };
+
+  return (
+    <SocketContext.provider
+      value={{
+        call,
+        callAccepted,
+        myVideo,
+        userVideo,
+        stream,
+        name,
+        setName,
+        callEnded,
+        me,
+        callUser,
+        leaveCall,
+        answerCall,
+      }}
+    >
+      {children}
+    </SocketContext.provider>
+  );
 };
+
+export { ContextProvider, SocketContext };
