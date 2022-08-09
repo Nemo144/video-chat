@@ -103,7 +103,7 @@ const ContextProvider = ({ children }) => {
   };
 
   return (
-    <SocketContext.provider
+    <SocketContext.Provider
       value={{
         call,
         callAccepted,
@@ -120,7 +120,7 @@ const ContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </SocketContext.provider>
+    </SocketContext.Provider>
   );
 };
 

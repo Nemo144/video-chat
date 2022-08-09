@@ -7,6 +7,8 @@ import "./style.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ContextProvider>
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </ContextProvider>
 );
