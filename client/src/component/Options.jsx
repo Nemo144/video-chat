@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { SocketContext } from "../SocketContext";
+import { AiFillCopy } from "react-icons/ai";
 
 export const Options = ({ children }) => {
   const [idToCall, setIdToCall] = useState("");
@@ -9,20 +10,26 @@ export const Options = ({ children }) => {
 
   return (
     <div className="w-96 mt-80 mb-0 p-0 sm:w-4/5  ">
-      <div className="px-10 py-10">
-        <form className="flex flex-col" noValidate autoComplete="off">
-          <div className="sm:flex-col w-full">
+      <div className="px-10">
+        <form className="" noValidate autoComplete="off">
+          <div className="flex flex-row bg-white w-full">
             <div className="p-20">
               <h1>Account Info</h1>
               <input
+                className="mt-10 border-black border border-t-0 border-r-0 border-l-0"
                 type="text"
                 label="Name"
+                placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 fullWidth
               />
-              <CopyToClipboard text={me} className="m-20">
-                <button type="button" color="#ffffff" fullWidth>
+              <CopyToClipboard
+                text={me}
+                className="bg-blue-600 border w-full p-2 flex flex-row justify-center items-center text-white mt-4 "
+              >
+                <button type="button">
+                  <AiFillCopy className="mt-1" />
                   copy your Id
                 </button>
               </CopyToClipboard>
