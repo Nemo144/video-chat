@@ -8,7 +8,7 @@ export const VideoPlayer = () => {
     <div className="flex flex-row justify-center ">
       {/* my video */}
       {stream && (
-        <div className="p-20 border-2  bg-transparent border-white border-solid m-10">
+        <div className="p-20 border-2 bg-white border-black border-solid m-10">
           <div className="w-full">
             <div className="-my-16 -mx-16">{name || "Name"}</div>
             <video playsInline muted ref={myVideo} autoPlay className="" />
