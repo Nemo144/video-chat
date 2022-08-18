@@ -71,9 +71,8 @@ export const Options = ({ children }) => {
             </div>
           </div>
         </form>
+        {children}
       </div>
-      Options
-      {children}
     </div>
   );
 };
