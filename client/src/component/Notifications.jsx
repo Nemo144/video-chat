@@ -6,9 +6,17 @@ export const Notifications = () => {
   return (
     <>
       {call.isReceivedCall && !callAccepted && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1>{call.name} is calling: </h1>
-          <button onClick={answerCall}>Answer</button>
+        <div
+          className="border w-80 ml-80 mb-10 bg-white rounded"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <h1 className="mr-2">{call.name} is calling: </h1>
+          <button
+            className="border text-white bg-blue-600 rounded-md w-20"
+            onClick={answerCall}
+          >
+            Answer
+          </button>
         </div>
       )}
     </>

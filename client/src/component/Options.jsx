@@ -10,10 +10,10 @@ export const Options = ({ children }) => {
     useContext(SocketContext);
 
   return (
-    <div className="w-96 mt-80 mb-0 p-0 sm:w-4/5  ">
+    <div className="w-96 mt-80 p-0 sm:w-4/5  ">
       <div className="px-10">
         <form className="flex justify-center" noValidate autoComplete="off">
-          <div className="flex flex-row bg-white w-3/4 justify-between h-64">
+          <div className="flex flex-row bg-white w-3/4 justify-between h-64 mb-10">
             <div className="p-20">
               <h1>Account Info</h1>
               <input
